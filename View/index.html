@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrate seu Gato</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container my-5">
+        <h1 class="text-center mb-4">🐱 Contrate seu Gato</h1>
+        
+        <div id="lista-gatos" class="row g-4">
+            <!-- Os cards dos gatos vão aparecer aqui -->
+        </div>
+    </div>
+
+    <script>
+        fetch('../index.php?action=listar')
+            .then(response => response.json())
+            .then(gatos => {
+                const container = document.getElementById('lista-gatos');
+                
+                gatos.forEach(gato => {
+                    const card = `
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow-sm">
+                                <img src="${gato.url_foto}" class="card-img-top" alt="${gato.nome}" style="height: 200px; object-fit: cover;">
+                                <div class="card-body">
+                                    <h5 class="card-title">${gato.nome}</h5>
+                                    <p class="card-text"><strong>Profissão:</strong> ${gato.profissao}</p>
+                                    <p class="card-text"><strong>Habilidade:</strong> ${gato.habilidade}</p>
+                                    <p class="card-text text-success"><strong>Preço:</strong> ${gato.preco_sache} sachês/hora</p>
+                                    <button class="btn btn-primary w-100">Contratar</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += card;
+                });
+            })
+            .catch(error => console.error('Erro ao carregar gatos:', error));
+    </script>
+
+</body>
+</html>
