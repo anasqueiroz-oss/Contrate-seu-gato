@@ -1,6 +1,6 @@
 <?php
 class Database {
-    private $host = "hidden"; 
+    private $host = "db.xqvbtbrckmbfafscrrvd.supabase.co"; 
     private $db_name = "postgres";
     private $username = "asan-dev";
     private $password = "gatos@sendocontratados";    
